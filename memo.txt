@@ -1,3 +1,22 @@
 
 protoc -I. --go_out=. proto/*.proto
 protoc -I. --go_out=. --go-grpc_out=. proto/*.proto
+
+interceptor
+    メソッドの前後に処理を行う仕組み
+    メソッドがリクエストを受け取る前、レスポンスを返したあとのタイミングなどで任意の処理を割り込ませることが可能
+    認証やロギング、監視やバリデーションなど複数のRPCで共通して行いたい処理で使用
+    Unary用とstreaming用が用意
+    サーバ側・クライアン側どちらにも対応
+        サーバ側
+            UnaryServerInterceptor
+            StreamServerInterceptor
+        クライアント側
+            UnaryClientInterceptor
+            StreamClientInterceptor
+
+https://github.com/FiloSottile/mkcert
+mkcert -CAROOT
+mkdir ssl
+cd ssl
+mkcert localhost
